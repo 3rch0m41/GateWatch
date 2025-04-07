@@ -1,3 +1,4 @@
+from datetime import datetime
 import socket
 from pyfiglet import figlet_format
 import time 
@@ -74,6 +75,26 @@ def resultPrint ():
     for port in portClosed: 
         print(f"Port {port} is closed on {targetIp}.")
 
+def exportLastScan (): 
+    global target, targetIp
+    if (target and targetIp) == 0 or (target and targetIp) == "":
+        return 0
+    else: 
+        currOrar = datetime.now().date()
+        with open ("C:\\temp\\gateWatchExport " + str (currOrar) +  ".txt", 'a') as f:
+            f.write("Host scanned is " + str(targetIp) + "\n")
+            if not portOpen: 
+                print ("No port open on the host\n\n")
+                print ("The closed ports are the following: \n")
+                for item in portClosed:
+                    f.write("Port " + str(item) + "is closed on the Host!\n")
+            else: 
+                f.write("List of open ports: \n")
+                for item in portOpen:
+                    f.write("Port " + str(item) + "is open on the Host!\n")
+        return 1
+            
+
 
 def menu ():
     
@@ -82,10 +103,11 @@ def menu ():
     print("1. Scan only the most used and common port of the host\n")
     print("2. Scan all the well-known ports of the host\n")
     print("3. Scan a specific port range of the host\n")
+    print("4. Export on file the last scan\n")
     print("9. Exit Gate Watch")
 
     while True:
-        choice = input("Enter your choice (1-3 or 9): ")
+        choice = input("Enter your choice (1-4 or 9): ")
         if choice == '1': 
             startTime = time.time()
             validateTargetAddress()
@@ -152,6 +174,14 @@ def menu ():
             resultPrint ()
             print("Time taken: ", time.time()-startTime)
 
+        elif choice == '4':
+
+            res = exportLastScan()
+            if res == 1:
+                print("Export completed successfully!")
+            else:
+                print("No scan to be saved!")
+        
         elif choice == '9': 
             print("Goodbye! See you soon! ")
             break
@@ -168,3 +198,20 @@ if __name__ == "__main__":
     print("\n****************************************************************")
 
     menu()
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
