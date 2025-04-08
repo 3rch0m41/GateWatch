@@ -1,6 +1,7 @@
 # GateWatch
 
 Simple Port Scanner in Python. Which the sockets tries to create a connection with the host, if the connection is successfull the port is open, otherwise is closed.
+Gate Watch also implements threads usage in order to increse the speed of the execution of the various connection tentatives.
 
 
 The Gate Watch has a menu function:
