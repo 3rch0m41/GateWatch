@@ -11,5 +11,9 @@ The Gate Watch has a menu function:
 4. Export the last scan results to a file text
 
 
+### Further implementation: 
+- GUI interface
+- Implementation with a network scanner. Gate Watch takes the result of the network scanner as input to scan each host founded.
+- Implementation of Vulnerability Scanner
 
 
